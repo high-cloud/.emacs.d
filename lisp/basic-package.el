@@ -45,21 +45,6 @@
   ("C-e" . 'mwim-end-of-code-or-line)
   )
 
-(use-package undo-tree
-  :ensure t
-  :init (global-undo-tree-mode)
-  :after hydra
-  :bind ("C-x C-h u" . hydra-undo-tree/body)
-  :hydra (hydra-undo-tree (:hint nil)
-  "
-  _p_: undo  _n_: redo _s_: save _l_: load   "
-  ("p"   undo-tree-undo)
-  ("n"   undo-tree-redo)
-  ("s"   undo-tree-save-history)
-  ("l"   undo-tree-load-history)
-  ("u"   undo-tree-visualize "visualize" :color blue)
-  ("q"   nil "quit" :color blue)))
-
 
 
 (use-package good-scroll
@@ -156,5 +141,25 @@ Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cu
     ("M-x" . 'smex-major-mode-commands)
     ("C-c M-x" . 'execute-extended-command)
   )
+
+
+(use-package mule
+  :ensure nil
+  :config
+
+  (set-language-environment "UTF-8")
+  (set-buffer-file-coding-system 'utf-8-unix)
+  (set-clipboard-coding-system 'utf-8-unix)
+  (set-file-name-coding-system 'utf-8-unix)
+  (set-keyboard-coding-system 'utf-8-unix)
+  (set-next-selection-coding-system 'utf-8-unix)
+  (set-selection-coding-system 'utf-8-unix)
+  (set-terminal-coding-system 'utf-8-unix)
+
+  (when (eq system-type 'windows-nt)
+    (set-language-environment "Chinese-GBK")
+    (set-selection-coding-system 'gbk-dos)
+    (set-next-selection-coding-system 'gbk-dos)
+    (set-clipboard-coding-system 'gbk-dos)))
 
 (provide 'basic-package)
